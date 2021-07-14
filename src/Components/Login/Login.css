@@ -42,7 +42,7 @@
   /* height: 80%; */
 }
 
-.register_input {
+.login_input {
   /* height: 25px; */
   margin: 8px 4px;
   padding: 7px;
@@ -57,18 +57,17 @@
     rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 }
 
-.register_inputs {
+.login_inputs {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.register_btn {
+.login_btn {
   margin: 20px 0px;
   padding: 8px 16px;
   border-radius: 3px;
   background-color: rgb(5, 124, 221);
-  color: white;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 1px;
@@ -76,11 +75,13 @@
   border-radius: 5px;
   border: none;
 }
-.register_text {
+
+.login_text {
   text-decoration: none;
   color: white;
 }
-.register_btn:hover {
+
+.login_btn:hover {
   background-color: rgba(7, 77, 134, 0.863);
   color: rgb(255, 255, 255);
   cursor: pointer;
@@ -122,7 +123,7 @@
     width: 85%;
   }
 
-  .register_input {
+  .login_input {
     margin: 25px 2px 5px 2px;
     padding: 7px;
     font-size: 1.2rem;

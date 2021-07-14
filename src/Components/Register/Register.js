@@ -1,10 +1,35 @@
 // PACKAGES
-import React from "react";
-
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 // CSS
 import "./Register.css";
 
 const Register = () => {
+  const history = useHistory();
+  const [signup, setSignup] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleInputState = (e) => {
+    const newSignup = { ...signup };
+    newSignup[e.target.id] = e.target.value;
+    setSignup(newSignup);
+  };
+
+  const handleRegisterForm = (e) => {
+    e.preventDefault();
+    if (signup.email && signup.password) {
+      const newUser = { email: signup.email, password: signup.password };
+      localStorage.setItem("users", JSON.stringify(newUser));
+      history.push("/login");
+    } else {
+      alert("Please Fill the form correctly");
+    }
+  };
+
   return (
     <div className="main_container">
       <form className="form">
@@ -17,13 +42,21 @@ const Register = () => {
               name="firstName"
               id="firstName"
               placeholder="Enter First Name"
+              value={signup.firstName}
+              onChange={(e) => {
+                handleInputState(e);
+              }}
             />
             <input
               className="register_input"
               type="text"
               name="lastName"
-              id="Lastname"
+              id="lastName"
               placeholder="Enter Lase Name"
+              value={signup.lastName}
+              onChange={(e) => {
+                handleInputState(e);
+              }}
             />
             <input
               className="register_input"
@@ -31,6 +64,10 @@ const Register = () => {
               name="email"
               id="email"
               placeholder="Enter Email"
+              value={signup.email}
+              onChange={(e) => {
+                handleInputState(e);
+              }}
             />
             <input
               className="register_input"
@@ -38,9 +75,19 @@ const Register = () => {
               name="password"
               id="password"
               placeholder="Enter Password"
+              value={signup.password}
+              onChange={(e) => {
+                handleInputState(e);
+              }}
             />
           </div>
-          <button className="register_btn" type="submit">
+          <button
+            onClick={(e) => {
+              handleRegisterForm(e);
+            }}
+            className="register_btn"
+            type="submit"
+          >
             Sign Up
           </button>
         </div>
