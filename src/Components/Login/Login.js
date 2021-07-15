@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 import "./Login.css";
 
-const url = "http://localhost:5000/login";
+const url = "http://localhost:3001/login";
 
 const Login = () => {
-  // const [isAuthorize, setIsAuthorize] = useState(false);
+  const [isAuthorize, setIsAuthorize] = useState(false);
   const [authEmail, setauthEmail] = useState("");
   const [authPassword, setauthPassword] = useState("");
 
@@ -15,20 +15,28 @@ const Login = () => {
     return user;
   };
 
+  const setLocalStorageAuthorizeUser = (token) => {
+    const authorizeUser = {
+      isAuthorize,
+      token,
+    };
+    localStorage.setItem("authorizeUser", JSON.stringify(authorizeUser));
+  };
+
   const loginValidation = async (data) => {
     const responce = await fetch(url, {
       method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
     const token = await responce.json();
+    setIsAuthorize(true);
     return token;
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     let { email, password } = getUserFromLocalStorage();
     if (authEmail && authPassword) {
@@ -38,17 +46,9 @@ const Login = () => {
           authPassword,
           id: new Date().getTime().toString(),
         };
-        // const token = loginValidation(authenticateUser);
-        fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: authenticateUser,
-        })
-          .then((res) => res.json())
-          .then((token) => console.log(token))
-          .catch((err) => console.log(err));
+        const { token } = await loginValidation(authenticateUser);
+        setLocalStorageAuthorizeUser(token);
+        // console.log(token);
       } else {
         console.log("User is not Registered");
       }
@@ -89,6 +89,14 @@ const Login = () => {
           <button className="login_btn" type="submit">
             Login
           </button>
+          <div className="goToRegister">
+            <p>
+              Don't have account?{" "}
+              <Link to="/register">
+                <span>Register here</span>
+              </Link>
+            </p>
+          </div>
         </div>
       </form>
     </div>

@@ -1,6 +1,6 @@
 // PACKAGES
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 // CSS
 import "./Register.css";
 
@@ -90,6 +90,14 @@ const Register = () => {
           >
             Sign Up
           </button>
+        </div>
+        <div className="goToLogin">
+          <p>
+            Already have an account?{" "}
+            <Link to="/login">
+              <span>Login here</span>
+            </Link>
+          </p>
         </div>
       </form>
     </div>

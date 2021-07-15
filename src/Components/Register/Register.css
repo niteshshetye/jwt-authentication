@@ -15,7 +15,7 @@
 }
 
 .form {
-  height: 55%;
+  height: 60%;
   width: 45%;
   background: rgb(255, 255, 255);
   position: absolute;
@@ -85,6 +85,11 @@
   color: rgb(255, 255, 255);
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+
+.goToLogin span {
+  color: rgb(5, 124, 221);
+  cursor: pointer;
 }
 
 @media (max-width: 1024px) {
